@@ -15,9 +15,7 @@ spring:
     hibernate:
       ddl-auto: create
     properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+      format_sql: true
     show_sql: true
   main:
     web-application-type: servlet
@@ -25,3 +23,8 @@ spring:
 application:
   base-url: http://localhost:9090
   prefix: /api
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
