@@ -1,4 +1,4 @@
-package com.sovannara.urlshortener.url;
+package com.sovannara.urlshortener.controllers;
 
 import com.sovannara.urlshortener.config.ApplicationConfig;
 import com.sovannara.urlshortener.dtos.CreateShortUrlRequest;
