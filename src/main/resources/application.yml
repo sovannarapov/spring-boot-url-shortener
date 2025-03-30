@@ -21,3 +21,7 @@ spring:
     show_sql: true
   main:
     web-application-type: servlet
+
+application:
+  base-url: http://localhost:9090
+  prefix: /api
