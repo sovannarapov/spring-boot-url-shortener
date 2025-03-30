@@ -1,6 +1,7 @@
 package com.sovannara.urlshortener.services;
 
 import com.sovannara.urlshortener.entities.ShortenedUrl;
+
 import java.util.Optional;
 
 public interface UrlService {

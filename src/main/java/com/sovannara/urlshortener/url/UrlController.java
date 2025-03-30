@@ -1,8 +1,8 @@
 package com.sovannara.urlshortener.url;
 
 import com.sovannara.urlshortener.config.ApplicationConfig;
-import com.sovannara.urlshortener.dtos.UrlResponse;
 import com.sovannara.urlshortener.dtos.CreateShortUrlRequest;
+import com.sovannara.urlshortener.dtos.UrlResponse;
 import com.sovannara.urlshortener.entities.ShortenedUrl;
 import com.sovannara.urlshortener.exceptions.UrlNotFoundException;
 import com.sovannara.urlshortener.models.ApiResponse;
@@ -10,7 +10,6 @@ import com.sovannara.urlshortener.services.UrlService;
 import com.sovannara.urlshortener.services.UrlShorteningService;
 import com.sovannara.urlshortener.utils.UrlValidator;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -53,11 +52,11 @@ public class UrlController {
     @GetMapping("/{code}")
     public ResponseEntity<String> redirectToLongUrl(@PathVariable String code) {
         ShortenedUrl shortenedUrl = _service.findByCode(code)
-            .orElseThrow(() -> new UrlNotFoundException("URL not found"));
+                .orElseThrow(() -> new UrlNotFoundException("URL not found"));
 
-         return ResponseEntity.status(HttpStatus.FOUND)
-                 .location(URI.create(shortenedUrl.getLongUrl()))
-                 .build();
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create(shortenedUrl.getLongUrl()))
+                .build();
     }
 
 }

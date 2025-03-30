@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "shortened_urls", indexes = { @Index(name = "idx_shortened_url_code", columnList = "code", unique = true) })
+@Table(name = "shortened_urls", indexes = {@Index(name = "idx_shortened_url_code", columnList = "code", unique = true)})
 public class ShortenedUrl {
 
     @Id
