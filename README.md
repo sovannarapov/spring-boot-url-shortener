@@ -23,7 +23,7 @@ url-shortener/
 ### Tech Stack
 
 - Java 21
-- Spring Boot 3.4.4
+- Spring Boot 3.2.3
 - PostgreSQL
 - Maven
 - JPA/Hibernate
