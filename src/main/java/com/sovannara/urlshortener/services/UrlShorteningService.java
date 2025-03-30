@@ -1,6 +1,5 @@
 package com.sovannara.urlshortener.services;
 
-import com.sovannara.urlshortener.url.UrlRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ public class UrlShorteningService {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     private final Random _random = new Random();
-    private final UrlRepository _repository;
+    private final UrlServiceImpl _repository;
 
     public String generateUniqueCode() {
         String code;
@@ -35,15 +34,6 @@ public class UrlShorteningService {
         }
 
         return codeBuilder.toString();
-
-        // var codeChars = new char[NumberOfCharsInShortLink];
-
-        // for (int i = 0; i < NumberOfCharsInShortLink; i++) {
-        //     var randomIndex = _random.nextInt(alphabet.length());
-        //     codeChars[i] = alphabet.charAt(randomIndex);
-        // }
-
-        // return new String(codeChars);
     }
 
 }
