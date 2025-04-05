@@ -9,8 +9,8 @@ A Spring Boot application that provides URL shortening functionality with a clea
 ```
 url-shortener/
 ├── src/main/java/com/sovannara/urlshortener/
-│   ├── config/            # Configuration classes
-│   ├── controllers/       # REST controllers
+│   ├── config/           # Configuration classes
+│   ├── controllers/      # REST controllers
 │   ├── dtos/             # Data Transfer Objects
 │   ├── entities/         # JPA entities
 │   ├── exceptions/       # Custom exceptions
@@ -23,7 +23,7 @@ url-shortener/
 ### Tech Stack
 
 - Java 21
-- Spring Boot 3.4.4
+- Spring Boot 3.2.3
 - PostgreSQL
 - Maven
 - JPA/Hibernate
