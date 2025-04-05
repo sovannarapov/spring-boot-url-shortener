@@ -33,10 +33,9 @@ public class UrlController {
     private final ApplicationConfig _config;
 
     @Operation(summary = "Create a shortened URL")
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "URL shortened successfully"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Invalid URL provided")
-    })
+    @ApiResponses(value = { @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description =
+            "URL shortened successfully"), @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400",
+            description = "Invalid URL provided") })
     @PostMapping("/create")
     public ApiResponse<UrlResponse> createShortUrl(@Validated @RequestBody CreateShortUrlRequest request) {
         if (!UrlValidator.isValid(request.getUrl())) {
@@ -46,12 +45,8 @@ public class UrlController {
         String code = _urlShorteningService.generateUniqueCode();
         String shortUrl = String.format("%s%s/url/%s", _config.getBaseUrl(), _config.getPrefix(), code);
 
-        ShortenedUrl shortenedUrl = ShortenedUrl.builder()
-                .longUrl(request.getUrl())
-                .shortUrl(shortUrl)
-                .code(code)
-                .createdOn(LocalDateTime.now())
-                .build();
+        ShortenedUrl shortenedUrl =
+                ShortenedUrl.builder().longUrl(request.getUrl()).shortUrl(shortUrl).code(code).createdOn(LocalDateTime.now()).build();
 
         _service.save(shortenedUrl);
 
@@ -59,18 +54,15 @@ public class UrlController {
     }
 
     @Operation(summary = "Redirect to original URL")
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "302", description = "Redirect to original URL"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "URL not found")
-    })
+    @ApiResponses(value = { @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "302", description =
+            "Redirect to original URL"), @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404",
+            description = "URL not found") })
     @GetMapping("/{code}")
     public ResponseEntity<String> redirectToLongUrl(@PathVariable String code) {
-        ShortenedUrl shortenedUrl = _service.findByCode(code)
-                .orElseThrow(() -> new UrlNotFoundException("URL not found"));
+        ShortenedUrl shortenedUrl =
+                _service.findByCode(code).orElseThrow(() -> new UrlNotFoundException("URL not " + "found"));
 
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create(shortenedUrl.getLongUrl()))
-                .build();
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(shortenedUrl.getLongUrl())).build();
     }
 
 }
