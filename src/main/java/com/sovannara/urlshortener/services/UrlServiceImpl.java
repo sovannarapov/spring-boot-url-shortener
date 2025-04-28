@@ -24,8 +24,8 @@ public class UrlServiceImpl implements UrlService {
     }
 
     @Override
-    public ShortenedUrl save(ShortenedUrl shortenedUrl) {
-        return _repository.save(shortenedUrl);
+    public void save(ShortenedUrl shortenedUrl) {
+        _repository.save(shortenedUrl);
     }
 
 }

@@ -10,6 +10,6 @@ public interface UrlService {
 
     Optional<ShortenedUrl> findByCode(String code);
 
-    ShortenedUrl save(ShortenedUrl shortenedUrl);
+    void save(ShortenedUrl shortenedUrl);
 
 }
