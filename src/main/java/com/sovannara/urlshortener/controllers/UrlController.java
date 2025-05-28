@@ -34,10 +34,10 @@ public class UrlController {
     private final ApplicationConfig _config;
 
     @Operation(summary = "Create a shortened URL")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "URL shortened successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid URL provided") })
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "URL shortened successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid URL provided")})
     @PostMapping("/create")
-    Response<UrlResponse> createShortUrl(@Validated @RequestBody CreateShortUrlRequest request) {
+    ResponseEntity<Response<UrlResponse>> createShortUrl(@Validated @RequestBody CreateShortUrlRequest request) {
         if (!UrlValidator.isValid(request.getUrl())) {
             throw new InvalidUrlException("Invalid URL format");
         }
@@ -50,12 +50,17 @@ public class UrlController {
 
         _service.save(shortenedUrl);
 
-        return Response.success(new UrlResponse(shortUrl));
+        return ResponseEntity.ok(new Response<>(
+                true,
+                HttpStatus.OK.value(),
+                "URL shortened successfully",
+                new UrlResponse(shortUrl),
+                null));
     }
 
     @Operation(summary = "Redirect to original URL")
-    @ApiResponses(value = { @ApiResponse(responseCode = "302", description = "Redirect to original URL"),
-            @ApiResponse(responseCode = "404", description = "URL not found") })
+    @ApiResponses(value = {@ApiResponse(responseCode = "302", description = "Redirect to original URL"),
+            @ApiResponse(responseCode = "404", description = "URL not found")})
     @GetMapping("/{code}")
     ResponseEntity<String> redirectToLongUrl(@PathVariable String code) {
         ShortenedUrl shortenedUrl =
